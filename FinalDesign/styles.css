@@ -1,0 +1,670 @@
+/* ===============================================================
+   1) General Reset and Font (Resets defaults and sets base font)
+   =============================================================== */
+   * {  /* Selects all elements on the page */
+    margin: 0;  /* Removes any default margin */
+    padding: 0;  /* Removes any default padding */
+    box-sizing: border-box;  /* Ensures that padding and border are included in the element's total width and height */
+    font-family: 'Lato', sans-serif;  /* Sets the default font to 'Lato' with a sans-serif fallback */
+}
+
+/* =============================================================================
+   2) Body & Global Text (Styles the body element and sets global text colour)
+   ============================================================================= */
+body {  /* Targets  the body element */
+    background: url("bed-Background.jpg") no-repeat center center fixed;  /* Sets a fixed background image, centred with no repeat */
+    background-size: cover;  /* Scales the background image to cover the entire screen */
+    position: relative;  /* Sets the body position to relative for positioning child elements */
+    color: #f0f0f0;  /* Sets the default text colour to a light grey */
+}
+
+/* ================================================================
+   3) Page Header (Styles the fixed header at the top of the page)
+   ================================================================ */
+.page-header {  /* Targets  the element with the class 'page-header' */
+    position: fixed;  /* Fixes the header so it remains visible at the top */
+    top: 0;  /* Positions the header at the very top of the screen */
+    left: 0;  /* Aligns the header to the left edge of the screen */
+    width: 100%;  /* Makes the header span the full width of the screen */
+    height: 80px;  /* Sets the header height to 80 pixels */
+    background: rgba(0, 0, 0, 0.8);  /* Applies a semi-transparent black background */
+    z-index: 5;  /* Sets a high z-index to ensures the header appears above other elements */
+    display: flex;  /* Uses flexbox for aligning child elements */
+    align-items: center;  /* Vertically centres the header content */
+    justify-content: center;  /* Horizontally centres the header content */
+    border-bottom: 1px solid #ddd;  /* Adds a subtle bottom border to the header */
+}
+
+.page-header h1 {  /* Targets  h1 elements within the page header */
+    color: #fff;  /* Sets the heading text colour to white */
+}
+
+.page-header img.logo {  /* Targets  the image with the class 'logo' within the header */
+    position: absolute;  /* Positions the logo absolutely within the header */
+    right: 20px;  /* Places the logo 20 pixels from the right edge */
+    top: 50%;  /* Places the logo at 50% from the top of the header */
+    transform: translateY(-50%);  /* Adjusts the logo position to vertically centre it */
+    width: 100px;  /* Sets the width of the logo to 100 pixels */
+}
+
+/* Burger icon styling */
+.burger-menu {  /* Targets  the element with the class 'burger-menu' */
+    position: fixed;  /* Fixes the position of the burger menu on the screen */
+    top: 25px;  /* Positions it 25 pixels from the top */
+    left: 20px;  /* Positions it 20 pixels from the left */
+    z-index: 10;  /* Sets a high z-index so it appears above most elements */
+    font-size: 30px;  /* Sets the font size of the icon to 30 pixels */
+    color: #fff;  /* Sets the icon colour to white */
+    cursor: pointer;  /* Changes the cursor to a pointer when hovering */
+}
+
+/* ======================================================================
+   4) Sidebar (Styles the sidebar which is hidden off-screen by default)
+   ====================================================================== */
+.sidebar {  /* Targets  the element with the class 'sidebar' */
+    position: fixed;  /* Fixes the sidebar's position relative to the screen */
+    top: 80px;  /* Positions the sidebar just below the header (80px from the top) */
+    left: 0;  /* Aligns the sidebar to the left edge */
+    width: 160px;  /* Sets the sidebar width to 160 pixels */
+    height: calc(100% - 80px);  /* Sets the sidebar height to fill the screen minus the header height */
+    background-color: rgba(0, 0, 0, 0.5);  /* Applies a semi-transparent black background */
+    z-index: 4;  /* Sets a stacking order for the sidebar */
+    transform: translateX(-100%);  /* Initially moves the sidebar completely off-screen to the left */
+    transition: transform 0.3s ease;  /* Animate the sidebar sliding in and out over 0.3 seconds */
+}
+
+/* When the sidebar is open, slide it in */
+.sidebar.open {  /* Targets  the sidebar when its 'open' */
+    transform: translateX(0);  /* Resets the transform so the sidebar slides into view */
+}
+
+/* ========================================================
+   5) Sidebar Links (Styles the links within the sidebar)
+   ======================================================== */
+.sidebar a {  /* Targets  all anchor (<a>) elements inside the sidebar */
+    display: flex;  /* Uses flexbox for link layout */
+    justify-content: center;  /* Centres the link content horizontally */
+    align-items: center;  /* Centres the link content vertically */
+    height: 60px;  /* Sets a fixed height for each link */
+    padding: 0;  /* Removes any padding */
+    color: #f0f0f0;  /* Sets the text colour to a light grey */
+    text-decoration: none;  /* Removes the default underline from links */
+    font-size: 14px;  /* Sets the font size to 14 pixels */
+    border-bottom: 1px solid #ddd;  /* Adds a subtle bottom border for separation */
+}
+
+.sidebar a:hover {  /* Targets sidebar links on hover */
+    background-color: rgba(255, 255, 255, 0.2);  /* Applies a semi-transparent white background on hover */
+}
+
+.sidebar .exit-card {  /* Targets  the element with the class 'exit-card' within the sidebar */
+    position: absolute;  /* Positions the exit card absolutely within the sidebar */
+    bottom: 0;  /* Aligns it to the bottom of the sidebar */
+    width: 100%;  /* Sets its width to fill the sidebar */
+    border-top: 1px solid #ddd;  /* Adds a light grey top border for separation */
+    background-color: rgba(0, 0, 0, 0.5);  /* Applies a semi-transparent black background */
+}
+
+.icon {  /* Targets  elements with the class 'icon' */
+    display: inline-block;  /* Displays the icon as an inline block */
+    width: 20px;  /* Sets a fixed width of 20 pixels */
+    height: 20px;  /* Sets a fixed height of 20 pixels */
+    margin-right: 8px;  /* Adds an 8-pixel margin to the right */
+    vertical-align: middle;  /* Vertically aligns the icon in the middle of adjacent text */
+}
+
+/* ================================================================
+   6) Dropdown Menus (Styles dropdown menu containers and content)
+   ================================================================ */
+.dropdown {  /* Targets  elements with the class 'dropdown' */
+    position: relative;  /* Sets position to relative, to position dropdown content properly */
+}
+
+.dropdown-content {  /* Targets  the dropdown content */
+    display: none;  /* Hides the dropdown content by default */
+    opacity: 0;  /* Sets the opacity to 0 (fully transparent) by default */
+    position: absolute;  /* Positions the dropdown content absolutely within its container */
+    top: 0;  /* Aligns the top of the dropdown content with the container */
+    left: 100%;  /* Positions the dropdown content to the right of its container */
+    width: 200px;  /* Sets the width of the dropdown content to 200 pixels */
+    background-color: rgba(0, 0, 0, 0.3);  /* Applies a semi-transparent black background */
+    border: 1px solid rgba(255, 255, 255, 0.3);  /* Adds a semi-transparent white border */
+    border-radius: 4px;  /* Rounds the corners by 4 pixels */
+    z-index: 6;  /* Sets a high z-index to ensures the dropdown appears above other elements */
+    transition: opacity 0.15s ease-out;  /* Transitions the opacity for a fade-in/out effect */
+}
+
+.dropdown-content.visible {  /* Targets  the dropdown content when it has the class 'visible' */
+    display: block;  /* Changes Displays to block so it is visible */
+    opacity: 1;  /* Sets the opacity to 1 (fully opaque) */
+}
+
+.dropdown-content a {  /* Targets  anchor (<a>) elements inside the dropdown content */
+    display: flex;  /* Uses flexbox layout for the link */
+    align-items: center;  /* Centrse the items vertically within the link */
+    justify-content: flex-start;  /* Aligns items to the start (left) horizontally */
+    gap: 12px;  /* Adds a 12-pixel gap between items inside the link */
+    padding: 8px 10px;  /* Adds 8 pixels of vertical padding and 10 pixels of horizontal padding */
+    font-size: 14px;  /* Sets the font size to 14 pixels */
+    color: #f0f0f0;  /* Sets the link text colour to a light grey */
+    text-decoration: none;  /* Removes the default underline from the link */
+}
+
+/* ===============================================
+   7) Content Area (Styles the main content area)
+   =============================================== */
+.content {  /* Targets  elements with the class 'content' */
+    margin-top: 80px;  /* Adds a top margin of 80 pixels to avoid overlap with the fixed header */
+    display: flex;  /* Uses flexbox layout for the content area */
+    justify-content: center;  /* Centres the content horizontally */
+    align-items: center;  /* Centres the content vertically */
+    height: calc(100vh - 80px);  /* Sets the height to the screen height minus 80 pixels (header height) */
+    position: relative;  /* Sets position to relative for further positioning needs */
+    z-index: 1;  /* Sets a z-index to establish stacking context */
+}
+
+/* ===================================================================================
+   8) Card Container (Grid Layout - Styles the container that holds cards in a grid)
+   =================================================================================== */
+.card-container {  /* Targets  elements with the class 'card-container' */
+    display: grid;  /* Uses Grid layout to arrange cards */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  /* Defines responsive columns that fit a minimum of 250px and expand equally */
+    gap: 20px;  /* Sets a 20-pixel gap between grid items */
+    max-width: 1000px;  /* Limits the maximum width of the container to 1000 pixels */
+}
+
+/* ==================================================
+   9) Card Styling (Styles individual card elements)
+   ================================================== */
+.card {  /* Targets  elements with the class 'card' */
+    display: flex;  /* Uses flexbox layout inside the card */
+    flex-direction: column;  /* Stacks card contents vertically */
+    justify-content: center;  /* Centres the contents vertically within the card */
+    align-items: stretch;  /* Stretches child elements to fill the card's width */
+    width: 100%;  /* Sets the card's width to 100% of its container */
+    max-width: 500px;  /* Limits the card's maximum width to 500 pixels */
+    margin: 0;  /* Removes any default margin */
+    padding: 20px 10px;  /* Adds 20px padding on top/bottom and 10px on left/right */
+    background-color: rgba(0, 0, 0, 0.95);  /* Sets a nearly opaque black background */
+    border-radius: 8px;  /* Rounds the corners of the card by 8 pixels */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);  /* Applies a box shadow for depth */
+}
+
+/* ================================================================
+   2) Menu Items in the Card (Styles the menu items inside cards)
+   ================================================================*/
+.menu-item {  /* Targets elements with the class 'menu-item' */
+    display: block;  /* Displays the menu item as a block element */
+    width: 100%;  /* Sets the menu item's width to 100% of its container */
+    background-color: rgba(255, 255, 255, 0.05);  /* Apply a very subtle white background */
+    border-radius: 8px;  /* Rounds the corners of the menu item */
+    margin: 10px auto;  /* Adds a 10-pixel vertical margin and centre horizontally */
+    transition: background-color 0.3s;  /* Smoothly transition the background colour on hover */
+    padding: 15px;  /* Adds 15 pixels of padding inside the menu item */
+    box-sizing: border-box;  /* Ensures padding is included in the width calculation */
+}
+
+/* Hover effect for the entire menu-item */
+.menu-item:hover {  /* When the menu item is hovered */
+    background-color: rgba(255, 255, 255, 0.2);  /* Change the background colour to a slightly more opaque white */
+}
+
+/* Menu Item Link Styling */
+.menu-item a {  /* Targets anchor (<a>) elements within a menu item */
+    display: flex;  /* Uses flexbox layout for the link */
+    align-items: center;  /* Vertically centre the items within the link */
+    gap: 12px;  /* Adds a 12-pixel gap between items inside the link */
+    color: #fff;  /* Sets the link text colour to white */
+    font-size: 36px;  /* Sets a large font size (36px) for the link text */
+    text-decoration: none;  /* Removes the default underline from the link */
+    position: relative;  /* Sets the link position to relative */
+    transition: color 0.3s;  /* Smoothly transition the text colour on hover */
+}
+
+.menu-icon {  /* Targets elements with the class 'menu-icon' */
+    width: 64px;  /* Sets the width of the icon to 64 pixels */
+    height: 64px;  /* Sets the height of the icon to 64 pixels */
+    object-fit: contain;  /* Ensures the icon maintains its aspect ratio and fits inside its container */
+}
+
+.menu-text {  /* Targets the container with the class 'menu-text' */
+    display: flex;  /* Uses flexbox layout */
+    flex-direction: column;  /* Stack text elements vertically */
+}
+
+/* Title styling */
+.menu-title {  /* Targets elements with the class 'menu-title' */
+    font-size: 24px;  /* Sets the font size to 24 pixels */
+    margin: 0 0 4px 0;  /* Removes margin on top/right/left and Adds 4px margin on the bottom */
+}
+
+/* Subtitle styling */
+.menu-subtitle {  /* Targets elements with the class 'menu-subtitle' */
+    font-size: 14px;  /* Sets the font size to 14 pixels */
+    color: #ccc;  /* Sets the subtitle text colour to a lighter grey */
+    margin: 0;  /* Removes any margin from the subtitle */
+}
+
+.exit-link a {  /* Targets anchor (<a>) elements within an element with the class 'exit-link' */
+    font-weight: bold;  /* Makes the text bold */
+    font-size: 36px;  /* Sets the font size to 36 pixels */
+    text-align: center;  /* Centres the text inside the exit link */
+}
+
+/* ==========================================================================================
+   10) Default Forms & Messages Styling (Styles default forms and success/failure messages)
+   ========================================================================================== */
+form {  /* Targets all form elements */
+    background-color: white;  /* Sets the form background colour to white */
+    padding: 20px;  /* Adds 20 pixels of padding inside the form */
+    border-radius: 10px;  /* Rounds the corners of the form by 10 pixels */
+    width: 400px;  /* Sets a fixed width of 400 pixels for the form */
+    margin-top: 20px;  /* Adds a 20-pixel top margin to the form */
+    display: inline-block;  /* Displays the form as an inline-block element */
+    text-align: left;  /* Align the text inside the form to the left */
+}
+
+h1 {  /* Targets all h1 elements */
+    text-align: center;  /* Centres the heading text */
+    color: #333;  /* Sets the heading text colour to a dark grey */
+    margin-top: 20px;  /* Adds a 20-pixel top margin to the heading */
+}
+
+.inputbox {  /* Targets elements with the class 'inputbox' */
+    margin-bottom: 15px;  /* Adds a 15-pixel bottom margin to separate input fields */
+}
+
+.inputbox label {  /* Targets label elements within an inputbox */
+    display: block;  /* Displays the label as a block element */
+    margin-bottom: 5px;  /* Adds a 5-pixel bottom margin for spacing */
+    font-weight: bold;  /* Makes the label text bold */
+    color: #333;  /* Sets the label text colour to dark grey */
+}
+
+.inputbox input[type="text"],
+.inputbox input[type="email"],
+.inputbox input[type="url"],
+.inputbox input[type="date"],
+.inputbox input[type="number"] {  /* Targets various text-based input fields within an inputbox */
+    width: 100%;  /* Sets the input width to 100% of its container */
+    padding: 10px;  /* Adds 10 pixels of padding inside the input field */
+    border: 1px solid #ccc;  /* Adds a 1-pixel solid light grey border around the input */
+    border-radius: 5px;  /* Rounds the corners of the input by 5 pixels */
+    box-sizing: border-box;  /* Includes the padding and border in the input's total width */
+}
+
+.inputbox select {  /* Targets select elements within an inputbox */
+    width: 100%;  /* Sets the select width to 100% of its container */
+    padding: 10px;  /* Adds 10 pixels of padding inside the select */
+    border: 1px solid #ccc;  /* Adds a 1-pixel solid light grey border around the select */
+    border-radius: 5px;  /* Rounds the corners of the select by 5 pixels */
+    box-sizing: border-box;  /* Includes padding and border in the select's width */
+    font-size: 14px;  /* Sets the font size of the select text to 14 pixels */
+    background-color: white;  /* Sets the select background colour to white */
+}
+
+fieldset {  /* Targets fieldset elements, used for grouping form controls */
+    border: 1px solid #ccc;  /* Adds a 1-pixel solid light grey border around the fieldset */
+    padding: 15px;  /* Adds 15 pixels of padding inside the fieldset */
+    margin-bottom: 20px;  /* Adds a 20-pixel bottom margin to separate it from following elements */
+    border-radius: 5px;  /* Rounds the corners of the fieldset by 5 pixels */
+}
+
+legend {  /* Targets legend elements within a fieldset */
+    font-weight: bold;  /* Makes the legend text bold */
+    font-size: large;  /* Sets a larger font size for the legend */
+    padding: 0 10px;  /* Adds 10 pixels of horizontal padding to the legend */
+    color: #333;  /* Sets the legend text colour to dark grey */
+}
+
+.myButton {  /* Targets elements with the class 'myButton' that group buttons */
+    display: flex;  /* Uses flexbox layout to arrange buttons horizontally */
+    justify-content: space-between;  /* Distribute the buttons evenly with space between them */
+}
+
+.myButton input[type="submit"],
+.myButton input[type="reset"],
+.myButton input[type="button"] {  /* Targets different types of buttons within the .myButton container */
+    background-color: #444;  /* Sets a dark grey background for the buttons */
+    color: white;  /* Sets the button text colour to white */
+    padding: 10px 15px;  /* Adds padding inside the buttons */
+    border: none;  /* Removes any default border from the buttons */
+    border-radius: 5px;  /* Rounds the corners of the buttons by 5 pixels */
+    width: 48%;  /* Sets the buttons' width to 48% of their container */
+    font-weight: bold;  /* Makes the button text bold */
+}
+
+.myButton input[type="submit"]:hover,
+.myButton input[type="reset"]:hover,
+.myButton input[type="button"]:hover {  /* Targets hover state for buttons */
+    background-color: #666;  /* Change the background colour on hover to a lighter grey */
+}
+
+.success {  /* Targets elements with the class 'success' for success messages */
+    background-color: #dff0d8;  /* Sets a light green background to indicate success */
+    border: 1px solid #d6e9c6;  /* Adds a matching light green border */
+    color: #3c763d;  /* Sets the text colour to a dark green */
+    padding: 15px;  /* Adds 15 pixels of padding inside the success message */
+    margin: 20px auto;  /* Centres the message horizontally with 20 pixels vertical margin */
+    border-radius: 5px;  /* Rounds the corners of the success message by 5 pixels */
+    width: 400px;  /* Sets a fixed width of 400 pixels for the success message */
+    text-align: center;  /* Centres the text within the success message */
+    font-size: 16px;  /* Sets the font size of the success message to 16 pixels */
+}
+
+.error {  /* Targets elements with the class 'error' for error messages */
+    background-color: #f2dede;  /* Sets a light red background to indicate an error */
+    border: 1px solid #ebccd1;  /* Adds a red border to further highlight the error */
+    color: #a94442;  /* Sets the text colour to a dark red */
+    padding: 15px;  /* Adds 15 pixels of padding inside the error message */
+    margin: 20px auto;  /* Centres the error message horizontally with 20 pixels vertical margin */
+    border-radius: 5px;  /* Rounds the corners of the error message by 5 pixels */
+    width: 400px;  /* Sets a fixed width of 400 pixels for the error message */
+    text-align: center;  /* Centres the text within the error message */
+    font-size: 16px;  /* Sets the font size of the error message to 16 pixels */
+}
+
+/* ===================================================
+   Delete Page (Specific styling for the Delete pages)
+   =================================================== */
+.content.delete-page {  /* Targets elements with both 'content' and 'delete-page' classes */
+    margin-left: auto;  /* Automatically adjusts the left margin to centre the content */
+    display: flex;  /* Uses flexbox layout for this content area */
+    flex-direction: column;  /* Arranges child elements vertically */
+    justify-content: center;  /* Centres child elements vertically */
+    align-items: center;  /* Centres child elements horizontally */
+    height: calc(100vh - 60px);  /* Sets the height to fill the screen minus 60 pixels */
+}
+
+.content.delete-page form {  /* Targets form elements within the Delete page */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);  /* Apply a box shadow to create depth for the form */
+}
+
+.content.delete-page p {  /* Targets paragraph elements within the Delete page */
+    font-weight: bold;  /* Makes the paragraph text bold */
+    font-style: italic;  /* Italicise the paragraph text */
+    color: black;  /* Sets the paragraph text colour to black */
+}
+
+/* Centres the delete button within its container */
+.deleteButton {  /* Targets elements with the class 'deleteButton' */
+    display: flex;  /* Uses flexbox layout to centre the delete button */
+    justify-content: center;  /* Centres the button horizontally */
+}
+
+.deleteButton input[type="submit"] {  /* Targets the submit button inside the delete button container */
+    background-color: #444;  /* Sets a dark grey background for the delete button */
+    color: white;  /* Sets the delete button text colour to white */
+    padding: 10px 15px;  /* Adds padding inside the delete button */
+    border: none;  /* Removes any default border */
+    border-radius: 5px;  /* Rounds the corners of the delete button by 5 pixels */
+    width: 48%;  /* Sets the width of the delete button to 48% of its container */
+}
+
+.deleteButton input[type="submit"]:hover {  /* Targets the hover state for the delete submit button */
+    background-color: #666;  /* Darken the background colour on hover */
+}
+
+/* ==============================================
+   Add Page (Specific styling for the Add pages)
+   ==============================================*/
+.content.add-page {  /* Targets elements with both 'content' and 'add-page' classes */
+    margin-left: auto;  /* Automatically adjusts left margin to centre the content */
+    display: flex;  /* Uses flexbox layout for this content area */
+    flex-direction: column;  /* Arranges child elements vertically */
+    justify-content: center;  /* Centres child elements vertically */
+    align-items: center;  /* Centres child elements horizontally */
+    height: calc(100vh - 60px);  /* Sets the height to fill the screen minus 60 pixels */
+}
+
+.add-page {  /* Targets elements with the class 'add-page' */
+    text-align: center;  /* Centres the text on the Adds  page */
+}
+
+.add-page form,
+.add-page .card-container {  /* Targets both form elements and card containers on the Add page */
+    margin: 20px auto;  /* Centres these elements horizontally with a 20-pixel vertical margin */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);  /* Apply a box shadow for visual depth */
+}
+
+.add-page .card-container {  /* Further Targets the card container on the Add page */
+    margin-top: 20px;  /* Adds extra top margin to separate it from preceding content */
+}
+
+/* Page Under Construction Message Styling */
+.construction-message {  /* Targets elements with the class 'construction-message' */
+    text-align: center;  /* Centres the construction message text */
+    font-size: 45px;  /* Sets a large font size of 45 pixels */
+	font-weight: bold; /*Sets a font weight of bold for visibility*/
+    color: #333;  /* Sets the text colour to a dark grey */
+    padding: 20px;  /* Adds 20 pixels of padding around the message */
+    max-width: 1000px;  /* Limit the maximum width of the message container to 1000 pixels */
+    margin: 0 auto;  /* Centres the message container horizontally */
+}
+
+/* =======================================================================================
+   Amend/View Page Form Styling (Specific styling for some of the Amend/View page forms)
+   ======================================================================================= */  /* Section comment:  */
+.content.amend-view-page {  /* Targets elements with both 'content' and 'amend-view-page' classes */
+    margin-left: auto;  /* Automatically adjusts left margin to centre the content */
+    display: flex;  /* Uses flexbox layout for the content area */
+    flex-direction: column;  /* Arranges child elements vertically */
+    align-items: center;  /* Centres child elements horizontally */
+    height: auto;  /* Let the height adjust automatically based on content */
+    padding-top: 60px;  /* Adds 60 pixels of padding at the top to separate from other elements */
+}
+
+.amend-view-page form {  /* Targets form elements on the Amend/View page */
+    width: 900px;  /* Sets a fixed width of 900 pixels for the form */
+    margin: 150px auto;  /* Centres the form horizontally with a 150-pixel vertical margin (Works on my home display) */
+    display: block;  /* Displays the form as a block element */
+    text-align: left;  /* Align the text within the form to the left */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);  /* Apply a box shadow to give the form depth */
+}
+
+.amend-view-page .columns {  /* Targets the container that splits the form into columns */
+    display: flex;  /* Uses flexbox layout for columns */
+    justify-content: space-between;  /* Distribute columns evenly with space between */
+    gap: 20px;  /* Adds a 20-pixel gap between the columns */
+}
+
+.amend-view-page .left-column,
+.amend-view-page .right-column {  /* Targets both left and right columns in the form */
+    display: flex;  /* Uses flexbox layout within each column */
+    flex-direction: column;  /* Stack the column's elements vertically */
+    gap: 10px;  /* Adds a 10-pixel gap between elements in each column */
+}
+
+.amend-view-page .inputbox label {  /* Targets labels within input boxes on the Amend/View page */
+    display: inline-block;  /* Displays the label as an inline block element */
+    margin-bottom: 0;  /* Removes any bottom margin from the label */
+    font-weight: bold;  /* Makes the label text bold */
+    white-space: nowrap;  /* Prevents the label text from wrapping to a new line */
+    margin-right: 15px;  /* Adds a 15-pixel right margin to separate from the input field */
+}
+
+.amend-view-page .inputbox {  /* Targets input boxes on the Amend/View page */
+    display: flex;  /* Uses flexbox to arrange the label and input in a row */
+    justify-content: space-between;  /* Spreads the label and input out with space between */
+    align-items: center;  /* Vertically centres the label and input */
+    white-space: nowrap;  /* Prevents wrapping within the input box */
+}
+
+.amend-view-page .inputbox input,
+.amend-view-page .inputbox select {  /* Targets input and select elements within an inputbox */
+    width: 200px;  /* Sets a fixed width of 200 pixels for these fields */
+    box-sizing: border-box;  /* Includes padding and border in the total width */
+    margin-left: auto;  /* Automatically adjusts left margin to push the element to the right */
+}
+
+.amend-view-page .centered-select {  /* Targets the container for centred select dropdowns */
+    display: flex;  /* Uses flexbox layout for centring */
+    justify-content: center;  /* Centres the dropdown horizontally */
+    margin-bottom: 20px;  /* Adds a 20-pixel bottom margin for spacing */
+}
+
+.amend-view-page .centered-select select {  /* Targets select elements within the centred select container */
+    width: 220px;  /* Sets a fixed width of 220 pixels for the dropdown */
+}
+
+.amend-view-page .myButton {  /* Targets the container for form buttons on the Amend/View page */
+    display: flex;  /* Uses flexbox layout to arrange buttons horizontally */
+    justify-content: center;  /* Centres the buttons horizontally */
+    gap: 20px;  /* Adds a 20-pixel gap between the buttons */
+    margin-top: 20px;  /* Adds a 20-pixel top margin to separate from the form content */
+}
+
+/* ===============================================================
+   Place Orders Page (Specific styling for the Place Orders page)
+   =============================== ===============================*/
+.place-orders-content {  /* Targets elements with the class 'place-orders-content' */
+    margin: 150px auto 0;  /* Adds a 150-pixel top margin, centre horizontally, and no bottom margin */
+    max-width: 1400px;  /* Limit the maximum width to 1400 pixels */
+    display: flex;  /* Uses flexbox layout for this container */
+    flex-direction: column;  /* Arranges child elements vertically */
+    align-items: center;  /* Centres child elements horizontally */
+    position: relative;  /* Sets position to relative for any absolutely positioned children */
+}
+
+.place-orders-container {  /* Targets the container for order-related elements */
+    display: flex;  /* Uses flexbox layout to arrange child elements */
+    justify-content: center;  /* Centres the child elements horizontally */
+    gap: 30px;  /* Adds a 30-pixel gap between child elements */
+    width: 100%;  /* Sets the container width to 100% of its parent */
+    max-width: 1200px;  /* Limit the maximum width to 1200 pixels */
+    margin: 80px 0;  /* Adds an 80-pixel vertical margin */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);  /* Apply a box shadow for depth */
+    border-radius: 10px;  /* Rounds the corners of the container by 10 pixels */
+}
+
+.place-orders-messages {  /* Targets the container for order messages */
+    width: 100%;  /* Sets the width to 100% of the parent */
+    max-width: 1200px;  /* Limit the maximum width to 1200 pixels */
+    margin: 20px 0;  /* Adds a 20-pixel vertical margin */
+    text-align: center;  /* Centres the message text */
+}
+
+.place-orders-form .centered-select {  /* Targets the container for centred select dropdowns */
+    display: flex;  /* Uses flexbox layout for centring */
+    justify-content: center;  /* Centres the dropdown horizontally */
+}
+
+/* Place Orders Error & Success Messages */
+.place-orders-error {  /* Targets error message elements on the Place Orders page */
+    background: #fff0f0;  /* Sets a light, pinkish background for errors */
+    border-left: 4px solid #cc0000;  /* Adds a 4-pixel solid red border on the left */
+    padding: 15px 25px;  /* Adds 15 pixels vertical and 25 pixels horizontal padding */
+    color: #cc0000;  /* Sets the text colour to red for errors */
+    margin-bottom: 25px;  /* Adds a 25-pixel bottom margin */
+    border-radius: 4px;  /* Rounds the corners by 4 pixels */
+    display: inline-block;  /* Displays the error message as an inline-block element */
+}
+
+.place-orders-success {  /* Targets success message elements on the Place Orders page */
+    background: #e5ffe5;  /* Sets a light green background for success messages */
+    border: 1px solid green;  /* Adds a 1-pixel solid green border */
+    color: darkgreen;  /* Sets the text colour to dark green */
+    padding: 25px;  /* Adds 25 pixels of padding */
+    margin: 20px 0;  /* Adds a 20-pixel vertical margin */
+    width: 500px;  /* Sets a fixed width of 500 pixels for the message container */
+    text-align: center;  /* Centres the text within the success message */
+    border-radius: 8px;  /* Rounds the corners by 8 pixels */
+}
+
+.place-orders-success h3 {  /* Targets h3 elements within a success message */
+    margin-top: 0;  /* Removes any top margin */
+    color: #2c3e50;  /* Sets the header text colour to a dark blue-grey */
+    padding-bottom: 10px;  /* Adds 10 pixels of padding to the bottom */
+    border-bottom: 2px solid #c8e6c9;  /* Adds a 2-pixel solid bottom border for separation */
+}
+
+.place-orders-success ul {  /* Targets unordered lists within the success message */
+    list-style: none;  /* Removes default list bullet points */
+    padding: 0;  /* Removes any padding */
+    margin: 15px 0;  /* Adds a 15-pixel vertical margin */
+}
+
+.place-orders-success li {  /* Targets list items within the success message */
+    padding: 8px 0;  /* Adds 8 pixels of vertical padding */
+    border-bottom: 1px solid #c8e6c9;  /* Adds a 1-pixel solid bottom border for separation */
+    margin: 0 auto;  /* Centres the list item horizontally */
+    width: fit-content;  /* Sets the width to fit the content */
+}
+
+/* Place Orders Form & Table */
+.place-orders-form,
+.place-orders-table {  /* Targets both the form and table containers on the Place Orders page */
+    flex: 1;  /* Allow these containers to expand and fill available space */
+    padding: 25px;  /* Adds 25 pixels of padding inside the containers */
+    background: #ffffff;  /* Sets the background colour to white */
+    border-radius: 10px;  /* Rounds the corners by 10 pixels */
+    min-width: 300px;  /* Sets a minimum width of 300 pixels */
+}
+
+.place-orders-form form {  /* Targets the form within the Place Orders section */
+    display: block;  /* Displays the form as a block element */
+    margin: 0 auto;  /* Centres the form horizontally */
+    width: 80%;  /* Sets the form width to 80% of its container */
+    text-align: left;  /* Align the text inside the form to the left */
+}
+
+.place-orders-form .columns {  /* Targets the container that splits the order form into columns */
+    display: flex;  /* Uses flexbox layout for the columns */
+    justify-content: space-between;  /* Distribute the columns evenly with space between */
+    gap: 20px;  /* Adds a 20-pixel gap between the columns */
+}
+
+.place-orders-form .left-column,
+.place-orders-form .right-column {  /* Targets both the left and right columns in the order form */
+    display: flex;  /* Uses flexbox layout within each column */
+    flex-direction: column;  /* Stack the column's elements vertically */
+    gap: 10px;  /* Adds a 10-pixel gap between elements in the column */
+}
+
+/* Place Orders Input Box */
+.place-orders-inputbox {  /* Targets the input box container on the Place Orders page */
+    width: 100%;  /* Sets the width to 100% of its container */
+    max-width: 400px;  /* Limit the maximum width to 400 pixels */
+    margin: 0 auto 20px;  /* Centres the container horizontally and Adds a 20-pixel bottom margin */
+}
+
+.place-orders-inputbox label {  /* Targets labels within the orders input box */
+    display: block;  /* Displays the label as a block element */
+    margin-bottom: 8px;  /* Adds an 8-pixel bottom margin for spacing */
+    font-weight: 500;  /* Sets a medium font weight for the label */
+}
+
+#calculatedCost {  /* Targets the element with the ID 'calculatedCost' */
+    color: black;  /* Sets the text colour to black */
+    font-weight: bold;  /* Makes the text bold */
+}
+
+/* Place Orders Table */
+.place-orders-table h3 {  /* Targets h3 elements within the orders table section */
+    text-align: center;  /* Centres the header text */
+    margin-bottom: 20px;  /* Adds a 20-pixel bottom margin */
+    color: #333;  /* Sets the header text colour to dark grey */
+}
+
+.place-orders-table table {  /* Targets table elements on the Place Orders page */
+    width: 100%;  /* Sets the table width to 100% of its container */
+    border-collapse: collapse;  /* Collapse table borders for a cleaner look */
+    margin-top: 15px;  /* Adds a 15-pixel top margin */
+}
+
+.place-orders-table th {  /* Targets table header cells */
+    background: #f8f9fa;  /* Sets a light background for the header cells */
+    padding: 12px;  /* Adds 12 pixels of padding inside the header cells */
+    border-bottom: 2px solid #dee2e6;  /* Adds a 2-pixel solid bottom border */
+    text-align: center;  /* Centres the header text */
+    vertical-align: middle;  /* Vertically centre the header text */
+    color: #333;  /* Sets the header text colour to dark grey */
+}
+
+.place-orders-table td {  /* Targets table data cells */
+    padding: 12px;  /* Adds 12 pixels of padding inside each cell */
+    border-bottom: 1px solid #dee2e6;  /* Adds a 1-pixel solid bottom border for separation */
+    text-align: center;  /* Centres the cell content */
+    vertical-align: middle;  /* Vertically centres the cell content */
+    color: #333;  /* Sets the cell text colour to dark grey */
+}
