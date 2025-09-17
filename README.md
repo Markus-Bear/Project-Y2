@@ -53,13 +53,13 @@ Hotel-System/
 
 1. Clone this repository:
    ~~~bash
-   git clone https://github.com/your-username/hotel-system.git
-   cd hotel-system
+   git clone https://github.com/your-username/Project-Y2.git
+   cd FinalDesign
    ~~~
 2. Import the provided MySQL schema (`hotel.sql`) into your database.
 3. Update `db.inc.php` with your database credentials.
 4. Deploy to a PHP-compatible server.
-5. Access via browser at `http://localhost/hotel-system/`.
+5. Access via browser at `http://localhost/FinalDesign/`.
 
 ## 📖 Documentation
 
